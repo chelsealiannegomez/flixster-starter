@@ -1,0 +1,15 @@
+.movie-card {
+    flex: 1 1 20%;
+    background-color: lightblue;
+    margin: 10px;
+    min-height: 250px;
+}
+
+.movie-img {
+    width: 90%;
+    aspect-ratio: 1 / 1;
+}
+
+.movie-card h1 {
+    font-size: 24px;
+}
