@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.css'
-import.meta.env.VITE_API_KEY
 import data from './data/data.js'
 import MovieList from './MovieList.jsx'
 

@@ -9,6 +9,7 @@
     width: 90%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    margin-top:10px;
 }
 
 .movie-card h1 {
