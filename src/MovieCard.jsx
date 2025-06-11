@@ -31,7 +31,6 @@ async function fetchVideoID(movie_id) {
     try {
         const response = await fetch(url, options);
         const data = await response.json();
-        console.log(data);
         return data;
     } catch (err) {
         console.error(err);
@@ -85,9 +84,10 @@ const MovieCard = ( { prop } ) =>  {
         })
     }, [prop])
 
+    console.log("props", prop);
+
     return (
         <div className="movie-card" onClick={openModal}>
-            {/* <img className="movie-img" src={prop.backdrop_path}/> */}
             <img className="movie-img" src={"https://image.tmdb.org/t/p/w500/" + prop.poster_path}/>
             <h1>{prop.original_title}</h1>
             <p>Vote Average: {prop.vote_average}</p>

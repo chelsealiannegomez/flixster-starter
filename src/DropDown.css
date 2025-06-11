@@ -1,0 +1,8 @@
+.dropdown-open {
+    display: block;
+    text-align: left;
+}
+
+.dropdown-closed {
+    display: none;
+}
