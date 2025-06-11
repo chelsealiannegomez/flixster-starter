@@ -19,7 +19,7 @@ async function fetchData(page) {
   }
 }
 
-const NowPlaying = ( {sortMovies} ) => {
+const NowPlaying = ( {sortMovies, favorites, setFavorites} ) => {
     const [nowPlaying, setNowPlaying] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -43,7 +43,7 @@ const NowPlaying = ( {sortMovies} ) => {
     }
     
     return (
-        <DisplayMovies movies={nowPlaying} setMovies={setNowPlaying} sortMovies={sortMovies} handleLoadMore={handleLoadMore} page={page} totalPages={totalPages}/>
+        <DisplayMovies movies={nowPlaying} setMovies={setNowPlaying} sortMovies={sortMovies} handleLoadMore={handleLoadMore} page={page} totalPages={totalPages} favorites={favorites} setFavorites={setFavorites}/>
     )
 }
 

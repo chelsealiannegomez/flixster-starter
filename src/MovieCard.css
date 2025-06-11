@@ -38,3 +38,17 @@
     height: 80vh;
     overflow: auto;
 }
+
+.heart {
+    width: 25px;
+}
+
+.liked {
+    display: block;
+    width: 25px;
+}
+
+.not-liked {
+    display: hidden;
+    width: 25px;
+}

@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
 import './MovieCard.css'
+import heart from './assets/heart.png';
+import redHeart from './assets/red_heart.png';
+import watched from './assets/watched.png';
+import notWatched from './assets/not_watched.png';
+
 
 async function fetchGenres() {
     const options = {
@@ -37,11 +42,13 @@ async function fetchVideoID(movie_id) {
   }
 }
 
-const MovieCard = ( { prop } ) =>  {
+const MovieCard = ( { prop, favorites, setFavorites } ) =>  {
     const [style, setStyle] = useState("closed-modal");
     const [genres, setGenres] = useState({});
     const [videoID, setVideoID] = useState(0);
     const [runtime, setRuntime] = useState("No runtime provided");
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [watched, setWatched] = useState(false);
 
     const openModal = () => {
         setStyle(style === "open-modal" ? "closed-modal" : "open-modal")
@@ -86,6 +93,42 @@ const MovieCard = ( { prop } ) =>  {
         })
     }, [prop])
 
+    const handleFavorite = (e) => {
+        e.stopPropagation();
+        if (!isFavorite) {
+            const newFavorites = [...favorites];
+            newFavorites.push(prop);
+            setFavorites(newFavorites);
+        }
+        else {
+            const newFavorites = [...favorites];
+            newFavorites.splice(newFavorites.findIndex(item => item === prop), 1);
+            setFavorites(newFavorites);
+        }
+        setIsFavorite(!isFavorite);
+    }  
+
+    const handleWatched = (e) => {
+        e.stopPropagation();
+        if (!watched) {
+            const newWatched = [...allWatched];
+            newWatched.push(prop);
+            setAllWatched(newWatched);
+        }
+        else {
+            const newFavorites = [...favorites];
+            newFavorites.splice(newFavorites.findIndex(item => item === prop), 1);
+            setFavorites(newFavorites);
+        }
+        setIsFavorite(!isFavorite);
+    }  
+
+    // useEffect (() => {
+    //     if (favorites !== undefined && favorites.findIndex(item => item === prop) !== -1) {
+    //         setIsFavorite(true);
+    //     }
+    // }, [])
+
     return (
         <div className="movie-card" onClick={openModal}>
             {/* Grid Content */}
@@ -93,14 +136,15 @@ const MovieCard = ( { prop } ) =>  {
                 <img className="movie-img" src={"https://image.tmdb.org/t/p/w500/" + prop.poster_path}/>
                 <h1>{prop.title}</h1>
                 <p>Vote Average: {prop.vote_average}</p>
-                <img src="watched.png"/>
-            </div>
+                <img className="heart" src={isFavorite ? redHeart : heart} onClick={(e) => {handleFavorite(e)}}/>
+                <img className="heart" src={watched ? watched : notWatched} onClick={(e) => {handleWatched(e)}}/>
+            </div> 
             
 
             {/* Modal Content */}
             <div className={style}>
                 <div className="modal-content">
-                    <img src={"https://image.tmdb.org/t/p/w500/" + prop.backdrop_path} alt={prop.title}/>
+                    <img src={"https://image.tmdb.org/t/p/w500/" + prop.poster_path} alt={prop.title}/>
                     <p>{prop.title}</p>
                     <p>Release Date: {prop.release_date}</p>
                     <p>{prop.overview}</p>

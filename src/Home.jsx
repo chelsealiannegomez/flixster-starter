@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import data from './data/data.js'
 import MovieList from './MovieList.jsx'
 import SearchBar from './SearchBar';
-import DisplayFavorites from './DisplayFavorites.jsx';
+import { BrowserRouter as Router, Routes, Route, Link, BrowserRouter } from 'react-router-dom';
 
-const App = () => {
+const Home = () => {
   // Toggle Mode
   const [mode, setMode] = useState(0) // 0 = Default (Now Playing), 1 = Search Results
 
@@ -33,14 +32,6 @@ const App = () => {
 
   // Display Favorite -> Get list of favorites, display with DisplayFavorites
   const [favorites, setFavorites] = useState([])
-  const [show, setShow] = useState({display: 'block'});
-
-  const handleClickFavorites = () => {
-    console.log("Display Favorites");
-    setShow({display: 'none'})
-  }
-
-  const favoritesAndWatched = {favorites: favorites, setFavorites: setFavorites};
 
   return (
     <div className="App">
@@ -48,19 +39,18 @@ const App = () => {
         <h1>Flixster</h1>
       </header>
       <nav>
-        <div onClick={handleClickFavorites}>Favorites</div>
+        {/* Favorite Bar (Favorites)*/}
+
       </nav>
       
-      <div style={show}>
-        <form onSubmit={handleSearch}>
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-          <button type="submit">Search</button>
-          <button type="button" onClick={clearInput}>Clear</button>
-        </form>
-        <button onClick={handleToggle}>Toggle</button>
-        <MovieList mode={mode} searchQuery={submittedQuery} favorites={favorites} setFavorites={setFavorites}/>
-      </div>
-      <DisplayFavorites movies={favorites}/> 
+      <form onSubmit={handleSearch}>
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+        <button type="submit">Search</button>
+        <button type="button" onClick={clearInput}>Clear</button>
+      </form>
+      <button onClick={handleToggle}>Toggle</button>
+      <MovieList mode={mode} searchQuery={submittedQuery} favorites={favorites} setFavorites={setFavorites}/>
+
       <footer>
         CodePath
       </footer>
@@ -68,4 +58,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Home;
