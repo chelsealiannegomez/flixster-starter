@@ -3,6 +3,7 @@
     background-color: lightblue;
     margin: 10px;
     min-height: 250px;
+    max-width: 20%;
 }
 
 .movie-img {
@@ -40,15 +41,5 @@
 }
 
 .heart {
-    width: 25px;
-}
-
-.liked {
-    display: block;
-    width: 25px;
-}
-
-.not-liked {
-    display: hidden;
     width: 25px;
 }

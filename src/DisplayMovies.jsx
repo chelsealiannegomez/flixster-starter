@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import MovieCard from "./MovieCard";
 
-const DisplayMovies = ( { movies, setMovies, sortMovies, handleLoadMore, page, totalPages, favorites, setFavorites } ) => {
+const DisplayMovies = ( { movies, setMovies, sortMovies, handleLoadMore, page, totalPages, favoritesAndWatched } ) => {
     useEffect (() => {
         console.log("sort", sortMovies);
         if (sortMovies === "Sort By Title") {
@@ -40,7 +40,7 @@ const DisplayMovies = ( { movies, setMovies, sortMovies, handleLoadMore, page, t
             {
                 movies.map(movie => 
                     (
-                        <MovieCard key={movie.id} prop={movie} favorites={favorites} setFavorites={setFavorites}/>
+                        <MovieCard key={movie.id} prop={movie} favoritesAndWatched={favoritesAndWatched}/>
                     )
                 )
             }         

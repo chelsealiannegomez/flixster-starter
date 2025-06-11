@@ -42,13 +42,13 @@ async function fetchVideoID(movie_id) {
   }
 }
 
-const MovieCard = ( { prop, favorites, setFavorites } ) =>  {
+const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
     const [style, setStyle] = useState("closed-modal");
     const [genres, setGenres] = useState({});
     const [videoID, setVideoID] = useState(0);
     const [runtime, setRuntime] = useState("No runtime provided");
     const [isFavorite, setIsFavorite] = useState(false);
-    const [watched, setWatched] = useState(false);
+    const [isWatched, setIsWatched] = useState(false);
 
     const openModal = () => {
         setStyle(style === "open-modal" ? "closed-modal" : "open-modal")
@@ -96,38 +96,38 @@ const MovieCard = ( { prop, favorites, setFavorites } ) =>  {
     const handleFavorite = (e) => {
         e.stopPropagation();
         if (!isFavorite) {
-            const newFavorites = [...favorites];
+            const newFavorites = [...favoritesAndWatched.favorites];
             newFavorites.push(prop);
-            setFavorites(newFavorites);
+            favoritesAndWatched.setFavorites(newFavorites);
         }
         else {
-            const newFavorites = [...favorites];
+            const newFavorites = [...favoritesAndWatched.favorites];
             newFavorites.splice(newFavorites.findIndex(item => item === prop), 1);
-            setFavorites(newFavorites);
+            favoritesAndWatched.setFavorites(newFavorites);
         }
         setIsFavorite(!isFavorite);
     }  
 
     const handleWatched = (e) => {
         e.stopPropagation();
-        if (!watched) {
-            const newWatched = [...allWatched];
+        if (!isWatched) {
+            const newWatched = [...favoritesAndWatched.allWatched];
             newWatched.push(prop);
-            setAllWatched(newWatched);
+            favoritesAndWatched.setAllWatched(newWatched);
         }
         else {
-            const newFavorites = [...favorites];
-            newFavorites.splice(newFavorites.findIndex(item => item === prop), 1);
-            setFavorites(newFavorites);
+            const newWatched = [...favoritesAndWatched.allWatched];
+            newWatched.splice(newWatched.findIndex(item => item === prop), 1);
+            favoritesAndWatched.setAllWatched(newWatched);
         }
-        setIsFavorite(!isFavorite);
+        setIsWatched(!isWatched);
     }  
 
-    // useEffect (() => {
-    //     if (favorites !== undefined && favorites.findIndex(item => item === prop) !== -1) {
-    //         setIsFavorite(true);
-    //     }
-    // }, [])
+    useEffect (() => {
+        if (typeof favoritesAndWatched !== "undefined" && favoritesAndWatched.favorites.findIndex(item => item === prop) !== -1) {
+            favoritesAndWatched.setIsFavorite(true);
+        }
+    }, [])
 
     return (
         <div className="movie-card" onClick={openModal}>
@@ -137,7 +137,7 @@ const MovieCard = ( { prop, favorites, setFavorites } ) =>  {
                 <h1>{prop.title}</h1>
                 <p>Vote Average: {prop.vote_average}</p>
                 <img className="heart" src={isFavorite ? redHeart : heart} onClick={(e) => {handleFavorite(e)}}/>
-                <img className="heart" src={watched ? watched : notWatched} onClick={(e) => {handleWatched(e)}}/>
+                <img className="heart" src={isWatched ? watched : notWatched} onClick={(e) => {handleWatched(e)}}/>
             </div> 
             
 
