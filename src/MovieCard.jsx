@@ -79,22 +79,29 @@ const MovieCard = ( { prop } ) =>  {
 
     useEffect (() => {
         fetchVideoID(prop.id).then((result) => {
-            setVideoID(result.videos.results[0].key);
+            if (result.videos.results.length !== 0) {
+                setVideoID(result.videos.results[0].key);
+            }
             setRuntime((result.runtime).toString() + " minutes");
         })
     }, [prop])
 
-    console.log("props", prop);
-
     return (
         <div className="movie-card" onClick={openModal}>
-            <img className="movie-img" src={"https://image.tmdb.org/t/p/w500/" + prop.poster_path}/>
-            <h1>{prop.original_title}</h1>
-            <p>Vote Average: {prop.vote_average}</p>
+            {/* Grid Content */}
+            <div>
+                <img className="movie-img" src={"https://image.tmdb.org/t/p/w500/" + prop.poster_path}/>
+                <h1>{prop.title}</h1>
+                <p>Vote Average: {prop.vote_average}</p>
+                <img src="watched.png"/>
+            </div>
+            
+
+            {/* Modal Content */}
             <div className={style}>
                 <div className="modal-content">
-                    <img src={"https://image.tmdb.org/t/p/w500/" + prop.backdrop_path} alt={prop.original_title}/>
-                    <p>{prop.original_title}</p>
+                    <img src={"https://image.tmdb.org/t/p/w500/" + prop.backdrop_path} alt={prop.title}/>
+                    <p>{prop.title}</p>
                     <p>Release Date: {prop.release_date}</p>
                     <p>{prop.overview}</p>
                     <p>Genres: {getGenres(prop.genre_ids)}</p>

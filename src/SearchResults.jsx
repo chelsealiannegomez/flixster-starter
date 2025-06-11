@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import MovieCard from "./MovieCard";
+import DisplayMovies from './DisplayMovies';
 
 async function fetchSearchData(query, page) {
     const options = {
@@ -19,7 +19,7 @@ async function fetchSearchData(query, page) {
   }
 }
 
-const DisplayResults = ( {query} ) => {
+const DisplayResults = ( {query, sortMovies} ) => {
     const [searchResults, setSearchResults] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -27,8 +27,6 @@ const DisplayResults = ( {query} ) => {
     const handleLoadMore = () => {
         setPage(page + 1);
         fetchSearchData(query, page + 1).then((result) => {
-            console.log(`query: ${query}`);
-            console.log(query);
             addPage(result.results);
         })
     }
@@ -41,7 +39,6 @@ const DisplayResults = ( {query} ) => {
         fetchSearchData(query, page).then((result) => {
             setSearchResults(result.results);
             setTotalPages(result.total_pages);
-            console.log(query, result);
         })
     }, [query])
 
@@ -52,20 +49,9 @@ const DisplayResults = ( {query} ) => {
             </div>
         )
     }
-    console.log(page < totalPages);
+
     return (
-        <div>
-            <div className="movie-list">
-            {
-                searchResults.map(movie => {
-                    return (
-                        <MovieCard key={movie.id} prop={movie} />
-                    )
-                })
-            }         
-            </div>
-            <button onClick={handleLoadMore} style={{display: page < totalPages ? 'block' : 'none'}}>Load more</button>   
-        </div>
+        <DisplayMovies movies={searchResults} setMovies={setSearchResults} sortMovies={sortMovies} handleLoadMore={handleLoadMore} page={page} totalPages={totalPages}/>
     )
 }
 
@@ -77,10 +63,10 @@ const NoResults = () => {
     )
 }
 
-const SearchResults = ( { searchQuery } ) => {
+const SearchResults = ( { searchQuery, sortMovies} ) => {
     return (
         <>
-            {searchQuery !== "" ? <DisplayResults query={ searchQuery }/> : <NoResults />}
+            {searchQuery !== "" ? <DisplayResults query={ searchQuery } sortMovies={sortMovies}/> : <NoResults />}
         </>
     )
 }

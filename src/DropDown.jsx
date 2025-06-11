@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import './DropDown.css';
 
-const DropDown = ( {sortMovies, setSortMovies} ) => {
+const DropDown = ( {sortMovies, setSortMovies } ) => {
     const [style, setStyle] = useState("dropdown-closed");
 
     return (
