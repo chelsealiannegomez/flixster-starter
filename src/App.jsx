@@ -9,7 +9,6 @@ const App = () => {
 
   const handleToggle = () => {
     setMode(mode === 0 ? 1 : 0);
-    console.log(mode);
   }
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,7 +28,6 @@ const App = () => {
     setMode(0);
   }
 
-  console.log(mode);
   return (
     <div className="App">
       <h1>Flixster</h1>

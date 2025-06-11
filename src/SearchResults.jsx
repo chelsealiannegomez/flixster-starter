@@ -23,7 +23,6 @@ const DisplayResults = ( {query} ) => {
     const [searchResults, setSearchResults] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    console.log("search query", query)
 
     const handleLoadMore = () => {
         setPage(page + 1);
