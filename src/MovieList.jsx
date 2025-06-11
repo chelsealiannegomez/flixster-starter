@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard";
 import NowPlaying from "./NowPlaying"
 import SearchResults from './SearchResults';
 import './MovieList.css';
-import DropDown from './Dropdown';
+import DropDown from './DropDown';
 
 const MovieList = ( { mode, searchQuery, favorites, setFavorites } ) => {
     // Handling of Sorting
