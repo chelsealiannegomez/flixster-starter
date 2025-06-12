@@ -51,8 +51,21 @@
     width: 80%;
     height: 80vh;
     overflow: auto;
+    box-shadow: 0 0 30px black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.modal-content p{
+    font-size: 16px;
 }
 
 .heart {
     width: 25px;
+}
+
+.backdrop {
+    width: 500px;
+    height: 281px;
+    object-fit: cover;
 }

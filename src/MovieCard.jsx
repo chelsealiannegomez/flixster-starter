@@ -4,7 +4,7 @@ import heart from './assets/heart.png';
 import redHeart from './assets/red_heart.png';
 import watched from './assets/watched.png';
 import notWatched from './assets/not_watched.png';
-
+import poster from './assets/poster.png'
 
 async function fetchGenres() {
     const options = {
@@ -134,23 +134,22 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         <div className="movie-card" onClick={openModal}>
             {/* Grid Content */}
             <div>
-                <img className="movie-img" src={"https://image.tmdb.org/t/p/w500/" + prop.poster_path}/>
+                <img className="movie-img" src={prop.poster_path ? "https://image.tmdb.org/t/p/w500/" + prop.poster_path : poster}/>
                 <h1>{prop.title}</h1>
                 <p>Vote Average: {prop.vote_average}</p>
                 <img className="heart" src={isFavorite ? redHeart : heart} onClick={(e) => {handleFavorite(e)}}/>
                 <img className="heart" src={isWatched ? watched : notWatched} onClick={(e) => {handleWatched(e)}}/>
             </div> 
-            
 
             {/* Modal Content */}
             <div className={style}>
                 <div className="modal-content">
-                    <img src={"https://image.tmdb.org/t/p/w500/" + prop.backdrop_path} alt={prop.title}/>
-                    <p>{prop.title}</p>
-                    <p>Release Date: {prop.release_date}</p>
+                    <img src={prop.backdrop_path ? "https://image.tmdb.org/t/p/w500/" + prop.backdrop_path : poster} alt={prop.title} class="backdrop"/>
+                    <h1>{prop.title}</h1>
+                    <p><b>Release Date:</b> {prop.release_date}</p>
                     <p>{prop.overview}</p>
-                    <p>Genres: {getGenres(prop.genre_ids)}</p>
-                    <p>Runtime: {runtime}</p>
+                    <p><b>Genres:</b> {getGenres(prop.genre_ids)}</p>
+                    <p><b>Runtime:</b> {runtime}</p>
                     <iframe width="560" height="315" src={`https://www.youtube.com/embed/${videoID}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                 </div>
             </div>
