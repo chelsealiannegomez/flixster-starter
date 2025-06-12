@@ -134,7 +134,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         <div className="movie-card" onClick={openModal}>
             {/* Grid Content */}
             <div>
-                <img className="movie-img" src={prop.poster_path ? "https://image.tmdb.org/t/p/w500/" + prop.poster_path : poster}/>
+                <img className="movie-img" src={prop.poster_path ? "https://image.tmdb.org/t/p/w500/" + prop.poster_path : poster} alt={prop.title}/>
                 <h1>{prop.title}</h1>
                 <p>Vote Average: {prop.vote_average}</p>
                 <img className="heart" src={isFavorite ? redHeart : heart} onClick={(e) => {handleFavorite(e)}}/>

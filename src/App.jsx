@@ -38,23 +38,27 @@ const App = () => {
   const [showHome, setShowHome] = useState({display: 'block'});
   const [showFavorites, setShowFavorites] = useState({display: 'none'});
   const [showWatched, setShowWatched] = useState({display: 'none'});
+  const [navStyle, setNavStyle] = useState("side-nav-closed");
 
   const handleClickFavorites = () => {
     setShowHome({display: 'none'});
     setShowWatched({display: 'none'});
     setShowFavorites({display: 'flex'});
+    setNavStyle("side-nav-closed");
   }
 
   const handleClickWatched = () => {
     setShowHome({display: 'none'});
     setShowWatched({display: 'flex'});
     setShowFavorites({display: 'none'});
+    setNavStyle("side-nav-closed");
   }
 
   const handleClickHome = () => {
     setShowHome({display: 'block'});
     setShowWatched({display: 'none'});
     setShowFavorites({display: 'none'});
+    setNavStyle("side-nav-closed");
   }
 
   const favoritesAndWatched = {
@@ -66,16 +70,20 @@ const App = () => {
 
   const [sortMovies, setSortMovies] = useState("Default");
 
+  const handleNavBarClick = () => {
+    setNavStyle(navStyle === "side-nav" ? "side-nav-closed" : "side-nav");
+  }
+
   return (
     <div className="App">
       <header>
         <h1>Flixster 📹</h1>
       </header>
       <div className="body">
-        <nav className="side-nav">
-              <div onClick={handleClickHome} className="home">Home</div>
-              <div onClick={handleClickFavorites} className="favorites">Favorites</div>
-              <div onClick={handleClickWatched} className="watched">Watched</div>
+        <nav className={navStyle} onClick={handleNavBarClick}>
+              <div onClick={handleClickHome} className="home">{navStyle === "side-nav-closed" ? "⌂" : "Home"}</div>
+              <div onClick={handleClickFavorites} className="favorites">{navStyle === "side-nav-closed" ? "♥︎" : "Favorites"}</div>
+              <div onClick={handleClickWatched} className="watched">{navStyle === "side-nav-closed" ? "⎚-⎚" : "Watched"}</div>
         </nav>
 
         <div className="body-content">

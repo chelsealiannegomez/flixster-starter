@@ -47,17 +47,34 @@ nav {
   float: left;
   position: absolute;
   text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .side-nav {
   height: 100vh;
   background-color: #a90505;
-  width: 10%;
+  width: 12%;
   margin: 0;
   position: sticky;
   top: 0;
   color: #F1E6CD;
   font-size: 1.5vw;
+  transition: 0.5s;
+  overflow-x: hidden;
+}
+
+.side-nav-closed {
+  height: 100vh;
+  background-color: #a90505;
+  width: 5%;
+  margin: 0;
+  position: sticky;
+  top: 0;
+  color: #F1E6CD;
+  font-size: 1.8vw;
+  transition: 0.5s;
+  text-align: center;
 }
 
 .home, .favorites, .watched {
