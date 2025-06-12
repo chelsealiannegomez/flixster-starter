@@ -48,9 +48,8 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
     const [videoID, setVideoID] = useState(0);
     const [runtime, setRuntime] = useState("No runtime provided");
 
-    const [isWatched, setIsWatched] = useState(false);
-
     const [isFavorite, setIsFavorite] = useState(favoritesAndWatched?.favorites.some(item => item.id === prop.id) || false);
+    const [isWatched, setIsWatched] = useState(favoritesAndWatched?.allWatched.some(item => item.id === prop.id) || false);
 
     const openModal = () => {
         setStyle(style === "open-modal" ? "closed-modal" : "open-modal")
@@ -127,6 +126,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
 
     useEffect (() => {
         setIsFavorite(favoritesAndWatched?.favorites.some(item => item.id === prop.id) || false);
+        setIsWatched(favoritesAndWatched?.allWatched.some(item => item.id === prop.id) || false);
     }, [favoritesAndWatched])
 
     return (
