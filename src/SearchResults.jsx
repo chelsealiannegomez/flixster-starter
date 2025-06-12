@@ -19,7 +19,7 @@ async function fetchSearchData(query, page) {
   }
 }
 
-const DisplayResults = ( {query, sortMovies} ) => {
+const DisplayResults = ( {query, sortMovies, favoritesAndWatched} ) => {
     const [searchResults, setSearchResults] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -51,7 +51,7 @@ const DisplayResults = ( {query, sortMovies} ) => {
     }
 
     return (
-        <DisplayMovies movies={searchResults} setMovies={setSearchResults} sortMovies={sortMovies} handleLoadMore={handleLoadMore} page={page} totalPages={totalPages}/>
+        <DisplayMovies movies={searchResults} setMovies={setSearchResults} sortMovies={sortMovies} handleLoadMore={handleLoadMore} page={page} totalPages={totalPages} favoritesAndWatched={ favoritesAndWatched }/>
     )
 }
 
@@ -63,10 +63,10 @@ const NoResults = () => {
     )
 }
 
-const SearchResults = ( { searchQuery, sortMovies} ) => {
+const SearchResults = ( { searchQuery, sortMovies, favoritesAndWatched} ) => {
     return (
         <>
-            {searchQuery !== "" ? <DisplayResults query={ searchQuery } sortMovies={sortMovies}/> : <NoResults />}
+            {searchQuery !== "" ? <DisplayResults query={ searchQuery } sortMovies={ sortMovies } favoritesAndWatched={ favoritesAndWatched }/> : <NoResults />}
         </>
     )
 }

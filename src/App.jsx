@@ -86,8 +86,8 @@ const App = () => {
         <button onClick={handleToggle}>Toggle</button>
         <MovieList mode={mode} searchQuery={submittedQuery} favoritesAndWatched={favoritesAndWatched}/>
       </div>
-      <DisplayFavoritesAndWatched movies={favorites} style={showFavorites}/> 
-      <DisplayFavoritesAndWatched movies={allWatched} style={showWatched}/> 
+      <DisplayFavoritesAndWatched movies={favorites} favoritesAndWatched={favoritesAndWatched} style={showFavorites}/> 
+      <DisplayFavoritesAndWatched movies={allWatched} favoritesAndWatched={favoritesAndWatched} style={showWatched}/> 
       <footer>
         CodePath
       </footer>

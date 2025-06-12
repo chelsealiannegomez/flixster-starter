@@ -47,8 +47,10 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
     const [genres, setGenres] = useState({});
     const [videoID, setVideoID] = useState(0);
     const [runtime, setRuntime] = useState("No runtime provided");
-    const [isFavorite, setIsFavorite] = useState(false);
+
     const [isWatched, setIsWatched] = useState(false);
+
+    const [isFavorite, setIsFavorite] = useState(favoritesAndWatched?.favorites.some(item => item.id === prop.id) || false);
 
     const openModal = () => {
         setStyle(style === "open-modal" ? "closed-modal" : "open-modal")
@@ -95,17 +97,17 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
 
     const handleFavorite = (e) => {
         e.stopPropagation();
-        if (!isFavorite) {
+
+        const isAlreadyFavorite = favoritesAndWatched?.favorites?.some(item => item.id === prop.id);
+        if (!isAlreadyFavorite) {
             const newFavorites = [...favoritesAndWatched.favorites];
             newFavorites.push(prop);
             favoritesAndWatched.setFavorites(newFavorites);
         }
         else {
-            const newFavorites = [...favoritesAndWatched.favorites];
-            newFavorites.splice(newFavorites.findIndex(item => item === prop), 1);
+            const newFavorites = favoritesAndWatched.favorites.filter(item => item.id !== prop.id);
             favoritesAndWatched.setFavorites(newFavorites);
         }
-        setIsFavorite(!isFavorite);
     }  
 
     const handleWatched = (e) => {
@@ -124,10 +126,9 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
     }  
 
     useEffect (() => {
-        if (typeof favoritesAndWatched !== "undefined" && favoritesAndWatched.favorites.findIndex(item => item === prop) !== -1) {
-            favoritesAndWatched.setIsFavorite(true);
-        }
-    }, [])
+        setIsFavorite(favoritesAndWatched?.favorites.some(item => item.id === prop.id) || false);
+        console.log("favorites", favoritesAndWatched);
+    }, [favoritesAndWatched])
 
     return (
         <div className="movie-card" onClick={openModal}>
@@ -144,7 +145,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
             {/* Modal Content */}
             <div className={style}>
                 <div className="modal-content">
-                    <img src={"https://image.tmdb.org/t/p/w500/" + prop.poster_path} alt={prop.title}/>
+                    <img src={"https://image.tmdb.org/t/p/w500/" + prop.backdrop_path} alt={prop.title}/>
                     <p>{prop.title}</p>
                     <p>Release Date: {prop.release_date}</p>
                     <p>{prop.overview}</p>

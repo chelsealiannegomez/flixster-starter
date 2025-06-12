@@ -1,13 +1,14 @@
 import MovieCard from "./MovieCard";
 import './DisplayFavoritesAndWatched.css';
-const DisplayFavoritesAndWatched = ( {movies, style} ) => {
+
+const DisplayFavoritesAndWatched = ( {movies, style, favoritesAndWatched} ) => {
     return (
         <div>
             <div className="movie-list" style={style}>
             {
-                movies.map(movie => 
+                [...movies].map(movie => 
                     (
-                        <MovieCard key={movie.id} prop={movie}/>
+                        <MovieCard key={movie.id} prop={movie} favoritesAndWatched={favoritesAndWatched}/>
                     )
                 )
             }         
