@@ -127,7 +127,6 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
 
     useEffect (() => {
         setIsFavorite(favoritesAndWatched?.favorites.some(item => item.id === prop.id) || false);
-        console.log("favorites", favoritesAndWatched);
     }, [favoritesAndWatched])
 
     return (
