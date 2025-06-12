@@ -3,8 +3,8 @@ import './DisplayFavoritesAndWatched.css';
 
 const DisplayFavoritesAndWatched = ( {movies, style, favoritesAndWatched} ) => {
     return (
-        <div>
-            <div className="movie-list" style={style}>
+        <div className="movie-contents">
+            <div className="movie-what-list" style={style}>
             {
                 [...movies].map(movie => 
                     (

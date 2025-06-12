@@ -6,3 +6,16 @@
 .dropdown-closed {
     display: none;
 }
+
+select {
+    width: 120px;
+    background: white;
+    color: black;
+    border: none;
+}
+
+label {
+    float: right;
+    margin: 1% 2% 1% 2%;
+    display:flex;
+}

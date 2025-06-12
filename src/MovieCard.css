@@ -1,9 +1,18 @@
 .movie-card {
-    flex: 1 1 20%;
-    background-color: lightblue;
-    margin: 10px;
-    min-height: 250px;
+    flex: 0 1 18%;
     max-width: 18%;
+    background-color: white;
+    margin: 0.5vw;
+    min-height: 250px;
+    border: solid;
+    border-color: #a90505;
+    border-width: 2.5px;
+    border-radius: 5px;
+    transition: 0.25s;
+}
+
+.movie-card:hover {
+    box-shadow: 0 0 20px black;
 }
 
 .movie-img {
@@ -14,7 +23,11 @@
 }
 
 .movie-card h1 {
-    font-size: 24px;
+    font-size: 1.5vw;
+}
+
+.movie-card p {
+    font-size: 1vw;
 }
 
 .open-modal {

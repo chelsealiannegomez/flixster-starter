@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import MovieCard from "./MovieCard";
+import './DisplayMovies.css';
 
 const DisplayMovies = ( { movies, setMovies, sortMovies, handleLoadMore, page, totalPages, favoritesAndWatched } ) => {
     useEffect (() => {
@@ -34,7 +35,7 @@ const DisplayMovies = ( { movies, setMovies, sortMovies, handleLoadMore, page, t
     }, [sortMovies, movies.length])
 
     return (
-        <div>
+        <div className="movie-contents">
             <div className="movie-list">
             {
                 movies.map(movie => 
@@ -44,7 +45,7 @@ const DisplayMovies = ( { movies, setMovies, sortMovies, handleLoadMore, page, t
                 )
             }         
             </div>
-            <button onClick={handleLoadMore} style={{display: page < totalPages ? 'block' : 'none'}}>Load more</button>   
+            <button onClick={handleLoadMore} style={{display: page < totalPages ? 'block' : 'none'}} className="load-more">Load more</button>   
         </div>
     )
 }

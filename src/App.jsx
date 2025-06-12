@@ -4,6 +4,7 @@ import data from './data/data.js'
 import MovieList from './MovieList.jsx'
 import SearchBar from './SearchBar';
 import DisplayFavoritesAndWatched from './DisplayFavoritesAndWatched.jsx';
+import DropDown from './DropDown';
 
 const App = () => {
   // Toggle Mode
@@ -31,7 +32,7 @@ const App = () => {
     setMode(0);
   }
 
-  // Display Favorite -> Get list of favorites, display with DisplayFavorites
+  // Display Favorites and Watched -> Get list of favorites and watched, display with DisplayFavoritesAndWatched
   const [favorites, setFavorites] = useState([])
   const [allWatched, setAllWatched] = useState([])
   const [showHome, setShowHome] = useState({display: 'block'});
@@ -39,21 +40,18 @@ const App = () => {
   const [showWatched, setShowWatched] = useState({display: 'none'});
 
   const handleClickFavorites = () => {
-    console.log("Display Favorites");
     setShowHome({display: 'none'});
     setShowWatched({display: 'none'});
-    setShowFavorites({display: 'block'});
+    setShowFavorites({display: 'flex'});
   }
 
   const handleClickWatched = () => {
-    console.log("Display Watched");
     setShowHome({display: 'none'});
-    setShowWatched({display: 'block'});
+    setShowWatched({display: 'flex'});
     setShowFavorites({display: 'none'});
   }
 
   const handleClickHome = () => {
-    console.log("Display Home");
     setShowHome({display: 'block'});
     setShowWatched({display: 'none'});
     setShowFavorites({display: 'none'});
@@ -66,30 +64,41 @@ const App = () => {
     setAllWatched: setAllWatched,
   };
 
+  const [sortMovies, setSortMovies] = useState("Default");
+
   return (
     <div className="App">
       <header>
-        <h1>Flixster</h1>
+        <h1>Flixster 📹</h1>
       </header>
-      <nav>
-        <div onClick={handleClickFavorites}>Favorites</div>
-        <div onClick={handleClickWatched}>Watched</div>
-        <div onClick={handleClickHome}>Home</div>
-      </nav>
+      <div className="body">
+        <nav className="side-nav">
+              <div onClick={handleClickHome} className="home">Home</div>
+              <div onClick={handleClickFavorites} className="favorites">Favorites</div>
+              <div onClick={handleClickWatched} className="watched">Watched</div>
+        </nav>
+
+        <div className="body-content">
+          <div style={showHome}>
+            <div className="top-options">
+              <form onSubmit={handleSearch}>
+                <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+                <button type="submit">Search</button>
+                <button type="button" onClick={clearInput}>Clear</button>
+              </form>
+              <button onClick={handleToggle} className="toggle">Toggle</button>
+              <DropDown sortMovies={sortMovies} setSortMovies={setSortMovies}/>
+            </div>
+            <MovieList mode={mode} searchQuery={submittedQuery} favoritesAndWatched={favoritesAndWatched} sortMovies={sortMovies}/>
+          </div>
+          <DisplayFavoritesAndWatched movies={favorites} favoritesAndWatched={favoritesAndWatched} style={showFavorites}/> 
+          <DisplayFavoritesAndWatched movies={allWatched} favoritesAndWatched={favoritesAndWatched} style={showWatched}/> 
+        </div>
+
       
-      <div style={showHome}>
-        <form onSubmit={handleSearch}>
-          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-          <button type="submit">Search</button>
-          <button type="button" onClick={clearInput}>Clear</button>
-        </form>
-        <button onClick={handleToggle}>Toggle</button>
-        <MovieList mode={mode} searchQuery={submittedQuery} favoritesAndWatched={favoritesAndWatched}/>
       </div>
-      <DisplayFavoritesAndWatched movies={favorites} favoritesAndWatched={favoritesAndWatched} style={showFavorites}/> 
-      <DisplayFavoritesAndWatched movies={allWatched} favoritesAndWatched={favoritesAndWatched} style={showWatched}/> 
       <footer>
-        CodePath
+        Developed by: Chelsea Lianne Gomez 2025
       </footer>
     </div>
   )

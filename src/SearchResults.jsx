@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import DisplayMovies from './DisplayMovies';
+import './SearchResults.css';
 
 async function fetchSearchData(query, page) {
     const options = {
@@ -44,7 +45,7 @@ const DisplayResults = ( {query, sortMovies, favoritesAndWatched} ) => {
 
     if (searchResults.length === 0) {
         return (
-            <div>
+            <div className="no-results">
                 No movies to display
             </div>
         )
@@ -57,7 +58,7 @@ const DisplayResults = ( {query, sortMovies, favoritesAndWatched} ) => {
 
 const NoResults = () => {
     return (
-        <div>
+        <div className="no-results">
             Type something in the search bar to search
         </div>
     )

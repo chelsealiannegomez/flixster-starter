@@ -7,9 +7,9 @@ const DropDown = ( {sortMovies, setSortMovies } ) => {
 
     return (
         <label>
-            Sort
+            Sort&nbsp;
             <select value={sortMovies} onChange={e => setSortMovies(e.target.value)}>
-                <option label=""></option>
+                <option>Default</option>
                 <option>Sort By Title</option>
                 <option>Sort By Release Date</option>
                 <option>Sort By Vote Average</option>
