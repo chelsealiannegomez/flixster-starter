@@ -143,7 +143,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
             {/* Modal Content */}
             <div className={style}>
                 <div className="modal-content">
-                    <img src={prop.backdrop_path ? "https://image.tmdb.org/t/p/w500/" + prop.backdrop_path : poster} alt={prop.title} class="backdrop"/>
+                    <img src={prop.backdrop_path ? "https://image.tmdb.org/t/p/w500/" + prop.backdrop_path : poster} alt={prop.title} className="backdrop"/>
                     <h1>{prop.title}</h1>
                     <p><b>Release Date:</b> {prop.release_date}</p>
                     <p>{prop.overview}</p>

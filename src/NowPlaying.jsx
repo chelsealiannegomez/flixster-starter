@@ -43,7 +43,9 @@ const NowPlaying = ( {sortMovies, favoritesAndWatched} ) => {
     }, [isDefault]);
 
     const addPage = (more) => {
-        setNowPlaying([... nowPlaying, ...more])
+        const newArray = [... nowPlaying, ...more]
+        const uniqueArr = [...new Map(newArray.map(item => [item.id,item])).values()]
+        setNowPlaying(uniqueArr);
     }
 
     const handleLoadMore = () => {
