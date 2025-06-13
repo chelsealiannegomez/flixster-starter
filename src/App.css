@@ -138,6 +138,9 @@ form button {
 
 .top-options {
   height: 5vh;
+  background-color: #A9A9A9;
+  padding-bottom: 10px;
+  width: 95vw;
 }
 
 .toggle {
