@@ -3,6 +3,7 @@ import MovieCard from "./MovieCard";
 import './DisplayMovies.css';
 
 const DisplayMovies = ( { movies, setMovies, sortMovies, handleLoadMore, page, totalPages, favoritesAndWatched } ) => {
+    // Handle sorting method
     useEffect (() => {
         if (sortMovies === "Sort By Title") {
             const prev = [...movies];

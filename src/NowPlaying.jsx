@@ -20,11 +20,12 @@ async function fetchData(page) {
 }
 
 const NowPlaying = ( {sortMovies, favoritesAndWatched} ) => {
-    const [nowPlaying, setNowPlaying] = useState([]);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+    const [nowPlaying, setNowPlaying] = useState([]); // Initialize nowPlaying as an empty array
+    const [page, setPage] = useState(1); // Initialize page to 1
+    const [totalPages, setTotalPages] = useState(1); // Initialize total pages to 1
     const [isDefault, setIsDefault] = useState(true); // By default, sortMovies is default (true)
 
+    // Set isDefault so user can bring results back to default -> fetch from API again
     useEffect (() => {
         if (sortMovies === "Default" && !isDefault) {
             setIsDefault(true);
@@ -34,6 +35,7 @@ const NowPlaying = ( {sortMovies, favoritesAndWatched} ) => {
         }
     })
 
+    // Fetch data and set now playing and total pages
     useEffect (() => {
         if (isDefault) {
         fetchData(page).then((result) => {
@@ -42,12 +44,14 @@ const NowPlaying = ( {sortMovies, favoritesAndWatched} ) => {
         })}
     }, [isDefault]);
 
+    // Add a new page and filter out duplicates
     const addPage = (more) => {
         const newArray = [... nowPlaying, ...more]
         const uniqueArr = [...new Map(newArray.map(item => [item.id,item])).values()]
         setNowPlaying(uniqueArr);
     }
 
+    // OnClick of Load More button - increment page and make a call to the API
     const handleLoadMore = () => {
         setPage(page + 1);
         fetchData(page + 1).then((result) => {

@@ -43,8 +43,8 @@ async function fetchVideoID(movie_id) {
 }
 
 const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
-    const [style, setStyle] = useState("closed-modal");
-    const [genres, setGenres] = useState({});
+    const [style, setStyle] = useState("closed-modal"); // Initialize modal to closed
+    const [genres, setGenres] = useState({}); 
     const [videoID, setVideoID] = useState(0);
     const [runtime, setRuntime] = useState("No runtime provided");
 
@@ -55,16 +55,14 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         setStyle(style === "open-modal" ? "closed-modal" : "open-modal")
     }
 
-    const closeModal = () => {
-        setStyle(style === "open-modal" ? "closed-modal" : "open-modal")
-    }
-
+    // Retrieve Genres
     useEffect (() => {
         fetchGenres().then((result) => {
             setGenres(result.genres);
         })
     }, [prop])
 
+    // Helper function for getGenres to map ids to the correct genres
     const findGenre = (targetID) => {
         for (let i = 0; i < genres.length; i++) {
             if (genres[i].id === targetID) {
@@ -73,6 +71,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         }
     }
 
+    // Get genres
     const getGenres = (genre_ids) => {
         let genres = "";
         for (let i = 0; i < genre_ids.length; i++) {
@@ -85,6 +84,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         return genres;
     }
 
+    // Retrieve video ids
     useEffect (() => {
         fetchVideoID(prop.id).then((result) => {
             if (result.videos.results.length !== 0) {
@@ -94,9 +94,9 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         })
     }, [prop])
 
+    // Handle onClick of favorite icon
     const handleFavorite = (e) => {
         e.stopPropagation();
-
         const isAlreadyFavorite = favoritesAndWatched?.favorites?.some(item => item.id === prop.id);
         if (!isAlreadyFavorite) {
             const newFavorites = [...favoritesAndWatched.favorites];
@@ -109,6 +109,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         }
     }  
 
+    // Handle onClick of watched icon
     const handleWatched = (e) => {
         e.stopPropagation();
         if (!isWatched) {
@@ -124,6 +125,7 @@ const MovieCard = ( { prop, favoritesAndWatched } ) =>  {
         setIsWatched(!isWatched);
     }  
 
+    // Ensures that icons are loaded properly according to content of favoritesAndWatched
     useEffect (() => {
         setIsFavorite(favoritesAndWatched?.favorites.some(item => item.id === prop.id) || false);
         setIsWatched(favoritesAndWatched?.allWatched.some(item => item.id === prop.id) || false);
